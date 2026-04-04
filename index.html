@@ -310,16 +310,22 @@
         color: var(--mint-deep);
       }
       .menu-overlay {
-        display: none;
-        position: fixed;
-        inset: 0;
-        z-index: 998;
-        background: rgba(44, 44, 44, 0.3);
-        backdrop-filter: blur(3px);
-      }
-      .menu-overlay.show {
-        display: block;
-      }
+     /* NAYA */
+.menu-overlay {
+  display: block;        
+  position: fixed;
+  inset: 0;
+  z-index: 998;
+  background: rgba(44, 44, 44, 0.3);
+  backdrop-filter: blur(3px);
+  opacity: 0;            
+  pointer-events: none;  
+  transition: opacity 0.38s cubic-bezier(0.4, 0, 0.2, 1); 
+}
+.menu-overlay.show {
+  opacity: 1;            /* ← fade in */
+  pointer-events: all;   /* ← clickable */
+}
 
       /* ───────────────────────────────────────
    SECTION WRAPPER
