@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Harshal Nanoti — Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -310,22 +310,16 @@
         color: var(--mint-deep);
       }
       .menu-overlay {
-     /* NAYA */
-.menu-overlay {
-  display: block;        
-  position: fixed;
-  inset: 0;
-  z-index: 998;
-  background: rgba(44, 44, 44, 0.3);
-  backdrop-filter: blur(3px);
-  opacity: 0;            
-  pointer-events: none;  
-  transition: opacity 0.38s cubic-bezier(0.4, 0, 0.2, 1); 
-}
-.menu-overlay.show {
-  opacity: 1;            /* ← fade in */
-  pointer-events: all;   /* ← clickable */
-}
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 998;
+        background: rgba(44, 44, 44, 0.3);
+        backdrop-filter: blur(3px);
+      }
+      .menu-overlay.show {
+        display: block;
+      }
 
       /* ───────────────────────────────────────
    SECTION WRAPPER
@@ -1437,13 +1431,13 @@
    RESPONSIVE
 ─────────────────────────────────────── */
       @media (max-width: 900px) {
-         #cursor-dot,
-         #cursor-ring {
-         display: none;
-         }
-         html {
-         cursor: auto; /* default cursor wapas */
-         }
+        #cursor-dot,
+        #cursor-ring {
+          display: none;
+        }
+        html {
+          cursor: auto; /* default cursor wapas */
+        }
         .nav-links {
           display: none;
         }
@@ -1826,7 +1820,10 @@
                 <span class="project-tag">Responsive</span>
               </div>
               <div class="project-links">
-                <a href="https://www.dinshaws.co.in/" class="btn-sm btn-sm-dark" target="_blank"
+                <a
+                  href="https://www.dinshaws.co.in/"
+                  class="btn-sm btn-sm-dark"
+                  target="_blank"
                   ><i class="fa-solid fa-arrow-up-right-from-square"></i> Live
                   Demo</a
                 >
@@ -1863,7 +1860,8 @@
               </div>
               <div class="project-links">
                 <a
-                  href="https://github.com/harshal110420/etherealdna" target="_blank"
+                  href="https://github.com/harshal110420/etherealdna"
+                  target="_blank"
                   class="btn-sm btn-sm-ghost"
                   ><i class="fa-brands fa-github"></i> GitHub</a
                 >
