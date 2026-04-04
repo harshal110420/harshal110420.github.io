@@ -14,6 +14,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <style>
       /* ───────────────────────────────────────
    CSS VARIABLES & RESET
@@ -2037,6 +2038,8 @@
     </footer>
 
     <script>
+      emailjs.init("86veQ5XL4GpUrzDzu");
+
       /* ── CURSOR ── */
       const dot = document.getElementById("cursor-dot");
       const ring = document.getElementById("cursor-ring");
@@ -2168,26 +2171,64 @@
       });
 
       /* ── FORM SUBMIT ── */
+      /* ── FORM SUBMIT ── */
       function handleFormSubmit(btn) {
         const name = document.getElementById("fname").value.trim();
         const email = document.getElementById("femail").value.trim();
         const msg = document.getElementById("fmsg").value.trim();
+
         if (!name || !email || !msg) {
           alert("Please fill in all fields.");
           return;
         }
-        btn.textContent = "✓ Message Sent!";
-        btn.style.background = "linear-gradient(135deg, #5dbf8c, #3a9c68)";
+
+        btn.innerHTML =
+          '<i class="fa-solid fa-spinner fa-spin"></i>&nbsp; Sending...';
         btn.disabled = true;
-        setTimeout(() => {
-          btn.innerHTML =
-            '<i class="fa-solid fa-paper-plane"></i>&nbsp; Send Message';
-          btn.style.background = "";
-          btn.disabled = false;
-          document.getElementById("fname").value = "";
-          document.getElementById("femail").value = "";
-          document.getElementById("fmsg").value = "";
-        }, 3000);
+
+        const templateParams = {
+          from_name: name,
+          from_email: email,
+          message: msg,
+        };
+
+        // Tujhe notification mail
+        emailjs
+          .send("service_jfx5zbj", "template_ezvrgda", templateParams)
+          .then(() => {
+            // User ko auto reply
+            return emailjs.send(
+              "service_jfx5zbj",
+              "template_67uxjkn",
+              templateParams,
+            );
+          })
+          .then(() => {
+            btn.innerHTML =
+              '<i class="fa-solid fa-check"></i>&nbsp; Message Sent!';
+            btn.style.background = "linear-gradient(135deg, #5dbf8c, #3a9c68)";
+            document.getElementById("fname").value = "";
+            document.getElementById("femail").value = "";
+            document.getElementById("fmsg").value = "";
+            setTimeout(() => {
+              btn.innerHTML =
+                '<i class="fa-solid fa-paper-plane"></i>&nbsp; Send Message';
+              btn.style.background = "";
+              btn.disabled = false;
+            }, 3000);
+          })
+          .catch((error) => {
+            console.error("EmailJS error:", error);
+            btn.innerHTML =
+              '<i class="fa-solid fa-xmark"></i>&nbsp; Failed, Try Again';
+            btn.style.background = "linear-gradient(135deg, #e8a89c, #d97065)";
+            btn.disabled = false;
+            setTimeout(() => {
+              btn.innerHTML =
+                '<i class="fa-solid fa-paper-plane"></i>&nbsp; Send Message';
+              btn.style.background = "";
+            }, 3000);
+          });
       }
 
       /* ── DOWNLOAD BTN ── */
