@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-   <meta
+    <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
@@ -63,6 +63,8 @@
         color: var(--charcoal);
         overflow-x: hidden;
         line-height: 1.7;
+        touch-action: pan-y; /* ← ADD KARO */
+        -webkit-overflow-scrolling: touch; /* ← ADD KARO */
       }
 
       /* ───────────────────────────────────────
@@ -312,16 +314,21 @@
       .mobile-menu a:hover {
         color: var(--mint-deep);
       }
+      /* NAYA */
       .menu-overlay {
-        display: none;
+        display: block;
         position: fixed;
         inset: 0;
         z-index: 998;
         background: rgba(44, 44, 44, 0.3);
         backdrop-filter: blur(3px);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.38s cubic-bezier(0.4, 0, 0.2, 1);
       }
       .menu-overlay.show {
-        display: block;
+        opacity: 1;
+        pointer-events: all;
       }
 
       /* ───────────────────────────────────────
